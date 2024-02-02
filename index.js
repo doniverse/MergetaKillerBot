@@ -1,8 +1,8 @@
 const {Bot, MemorySessionStorage }= require('grammy');
 const {chatMembers} = require('@grammyjs/chat-members');
 require('dotenv').config();
+
 // Create an instance of the `Bot` class and pass your bot token to it.
-console.log(process.env.BOT_TOKEN)
 const bot = new Bot(process.env.BOT_TOKEN); // <-- put your bot token between the ""
 
 // You can now register listeners on your bot object `bot`.
@@ -24,7 +24,7 @@ bot.command("start", (ctx) =>{
 bot.on('message', ctx =>{
     const full_name = `${ctx.message.from.first_name} ${ctx.message.from.last_name}`;
     const user_id = ctx.message.from.id;
-    if(full_name.startsWith("መርጌታ") || full_name.endsWith("መርጌታ")){
+    if(full_name.startsWith("መርጌታ") || full_name.endsWith("መርጌታ") || full_name.includes("መርጌታ")){
         ctx.banChatMember(user_id);
         ctx.reply("Another መርጌታ eliminated!");
     }
