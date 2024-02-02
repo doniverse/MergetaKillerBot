@@ -3,7 +3,7 @@ const {chatMembers} = require('@grammyjs/chat-members');
 require('dotenv').config();
 
 // Create an instance of the `Bot` class and pass your bot token to it.
-const bot = new Bot("6745608618:AAEWljbsw1jdmepScT8HXXP6zKN9OR5xSAo"); // <-- put your bot token between the ""
+const bot = new Bot(process.env.BOT_TOKEN); // <-- put your bot token between the ""
 
 // You can now register listeners on your bot object `bot`.
 const adapter = new MemorySessionStorage();
