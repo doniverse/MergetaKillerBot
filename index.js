@@ -10,13 +10,13 @@ const adapter = new MemorySessionStorage();
 bot.use(chatMembers(adapter));
 
 
-bot.catch('error', ctx =>{
+bot.catch('error', error =>{
     console.log("Error ")
 })
 
 // Handle the /start command.
 bot.command("start", (ctx) =>{
-     ctx.reply("Just add me to your group, I will take care of the rest!")
+     ctx.reply("Just add me to your group, I will take care of the rest! \n ⚠️ Make sure to make me an admin, and give ban rights.")
      allowed_updates: ["chat_member", "message"]
     });
 
@@ -25,8 +25,13 @@ bot.on('message', ctx =>{
     const full_name = `${ctx.message.from.first_name} ${ctx.message.from.last_name}`;
     const user_id = ctx.message.from.id;
     if(full_name.startsWith("መርጌታ") || full_name.endsWith("መርጌታ") || full_name.includes("መርጌታ")){
-        ctx.banChatMember(user_id);
-        ctx.reply("Another መርጌታ eliminated!");
+        try {
+            ctx.banChatMember(user_id);
+            ctx.reply("Another መርጌታ eliminated!");
+        } catch (error) {
+            console.error(error);
+            ctx.reply('Could not perform ban. Make sure to give admin ban rights.');
+        }
     }
 
 })
